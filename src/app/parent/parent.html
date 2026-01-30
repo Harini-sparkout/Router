@@ -1,0 +1,15 @@
+<h2>parent component</h2>
+<input type="text" [(ngModel)]="searchText" (ngModelChange)="onSearchChange()" placeholdeer="search">
+<br>
+@if (filteredNames.length > 0) {
+  <ul>
+    @for (name of filteredNames; track name) {
+      <li (click)="selectName(name)">
+        {{ name }}
+      </li>
+    }
+  </ul>
+}
+
+
+<app-child [value]="selectedName" ></app-child>
