@@ -1,0 +1,53 @@
+<section [formGroup]="userDetails">
+    <div>
+        <label for="name">name</label>
+        <input name="name" type="text" formControlName="name">
+        @let name=  userDetails.controls.name;
+        @if(name.errors && name.dirty){
+            <div class="text-red-500">
+                @if(name.errors['required']){
+                    <p>name is required</p>
+                }
+                @if(name.errors['min']){
+                    <p>min char is 3</p>
+                }
+                @if(name.errors['max']){
+                    <p>max age allowed is 5</p>
+                }
+
+            </div>
+        }
+
+     </div>
+<div>
+  
+    <label for="age">Age</label>
+    <input name="age" type="number" [formControl]="userDetails.controls.age" >
+    @if(userDetails.controls.age.errors && userDetails.controls.age.dirty){
+        <div class="text-red-500">
+@if(userDetails.controls.age.errors['required']){
+    <p>age is required</p>
+}
+@if(userDetails.controls.age.errors['min']){
+    <p>min age is 19</p>
+}
+@if(userDetails.controls.age.errors['max']){
+    <p>name cannot have more tha 60 character</p>
+}
+        </div>
+    }
+</div>
+</section>
+<button (click)="submit()" [disabled]="!userDetails.valid"> submit </button>
+
+<p>Value:{{userDetails.value|json}}</p>
+<p>Valid:{{userDetails.valid}}</p>
+<p>Dirty:{{userDetails.dirty}}</p>
+<p>Touched:{{userDetails.touched}}</p>
+<p>untouched:{{userDetails.untouched}}</p>
+<p>status:{{userDetails.status}}</p>
+<p>Enabled:{{userDetails.enabled}}</p>
+<p>Disabled:{{userDetails.disabled}}</p>
+<p>Errors:{{userDetails.errors|json}}</p>
+
+
