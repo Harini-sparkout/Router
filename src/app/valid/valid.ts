@@ -9,23 +9,25 @@ import { FormControl,   FormGroup, ReactiveFormsModule,Validators } from '@angul
   styleUrl: './valid.css',
 })
 export class Valid {
-        userDetails = new FormGroup({
-       name: new FormControl(null,[Validators.required,Validators.minLength(3),Validators.maxLength(60)]),
-       age: new FormControl(null,[Validators.required,Validators.min(18),Validators.max(100)])
-      
-
-
-       
-
-        });
-        submit(){
-          if(this.userDetails.valid){
-console.log(this.userDetails.value);
-          }
-          else{
-            this.userDetails.markAllAsTouched();
-          }
+       submitted= false;
+       userDetails= new FormGroup({
+        name: new FormControl(null,[Validators.required,Validators.minLength(5),Validators.maxLength(10)]),
+        age: new FormControl(null,[Validators.required,Validators.min(18),Validators.max(60)])
+       })
+       submit(){
+        this.submitted=true;
         
+        if(this.userDetails.valid){
+          console.log(this.userDetails.value);
+          this.userDetails.reset();
+          this.submitted= false;
+
+        }
+        else{
+          this.userDetails.markAllAsTouched();
+        }
        }
+
+
          
 }
