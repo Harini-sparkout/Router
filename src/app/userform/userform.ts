@@ -1,6 +1,6 @@
 import { CommonModule, JsonPipe } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormsModule, NgForm } from '@angular/forms';
+import { NgForm, FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-userform',
@@ -21,15 +21,10 @@ export class Userform implements OnInit{
               console.log(this.detailsForm?.value)
 
             }
-            submit(form:any){
-              
+           submit(form: NgForm) {
+             if (form.invalid)  { 
+                return; } 
                 console.log(form.value);
-
-                form.Reset();
-                this.details={name:'',age:null,gender:''}
-                 
-                
-
-            }
-          
+               form.resetForm();
+               }
 }
